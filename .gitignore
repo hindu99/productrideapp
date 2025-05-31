@@ -1,0 +1,42 @@
+node_modules/
+# === Root ===
+/node_modules/
+
+
+# === Frontend ===
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.env
+/frontend/.env.*.local
+/frontend/.vscode/
+
+# === Backend ===
+/backend/node_modules/
+/backend/build/
+/backend/out/
+/backend/tmp/
+/backend/temp/
+/backend/.env
+/backend/.env.*.local
+/backend/logs/
+*.log
+
+# === Common ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# === Editor / System Files ===
+.vscode/
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.local
