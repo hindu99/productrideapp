@@ -23,7 +23,7 @@ const RequirementWriting = () => {
 
     try {
 
-        const response= await fetch ('http://localhost:5000/api/requirmentbox', {
+        const response= await fetch ('http://localhost:5000/api/requirementbox', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
