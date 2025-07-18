@@ -1,4 +1,5 @@
-import { connect } from 'mssql';// Importing mssql package
+import mssql from 'mssql';
+// Importing mssql package
 import dotenv from 'dotenv';
 
 dotenv.config(); // This is loading environment variables from .env file to process.env
@@ -29,7 +30,7 @@ let pool;
 const connectDB = async () => {
     try {
         if (!pool) {
-            pool = await connect(config);
+            pool = await mssql.connect(config);
             console.log('SQL Server Connected (using pool)');
         }
         return pool;
