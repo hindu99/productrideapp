@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { findUserByEmail, createUser } from '../models/signupModel.js';
+import { findUserByEmail, createUser } from '../../models/authiModel/signupmodel.js';
 
 const signup = async (req, res) => {
   const { tenant, fullname, organisation, email, password } = req.body;

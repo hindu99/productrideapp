@@ -6,7 +6,8 @@ dotenv.config(); // This is loading environment variables from .env file to proc
 
 // Configuration for SQL Server connection
 const config = {
-user:process.env.DB_USER, //dotenv.config will make the process availble , now using process.env.DB_USER can reaf the DB_USER from .env file
+user:process.env.DB_USER, //dotenv.config wil
+// l make the process availble , now using process.env.DB_USER can reaf the DB_USER from .env file
 password:process.env.DB_PASSWORD,
 server:process.env.DB_SERVER||'localhost', // first cheks DB_SERVER env var, if not set, defaults to 'localhost'
 database:process.env.DB_DATABASE, // read the database name from DB_DATABASE env var
@@ -40,4 +41,4 @@ const connectDB = async () => {
     }
 };
 
-export default { connectDB, sql, pool: () => pool };
+export { connectDB, mssql, pool };
