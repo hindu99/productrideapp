@@ -9,11 +9,12 @@ const Signup = () => {
   // State variables for form fields and error message
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [tenant, setTenant] = useState('');
-  const [organisation, setOrganisation] = useState('');
+  const [category, setCategory] = useState('');
+  const [organisationName, setOrganisationName] = useState('');
   const [fullname, setFullname] = useState('');
   const [errors, setErrors] = useState([]); // For validation errors,"error" term is used 
   const [apiError, setApiError] = useState(''); // For API/server errors
+  let tenantName=''; //variable for storing tenant name 
 
   // Function to render error messages
   const renderErrors = () => {
@@ -37,8 +38,8 @@ const Signup = () => {
     const validationErrors = [];
     if (!email) validationErrors.push('Please enter the email');
     if (!password) validationErrors.push('Please enter password');
-    if (tenant === 'organisation' && !organisation) validationErrors.push('Enter your organisation name');
-    if (tenant === 'individualuser' && !fullname) validationErrors.push('Enter your name');
+    if (category === 'organisation' && !organisationName) validationErrors.push('Enter your organisation name');
+    if (category === 'individualuser' && !fullname) validationErrors.push('Enter ybour name');
 
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
@@ -48,13 +49,25 @@ const Signup = () => {
     setErrors([]); // clear previous errors
     setApiError(''); // clear previous API error
 
+    //Dynamic assignement of tenantName
+
+   if (category === 'individualuser') {
+  tenantName = fullname;
+   }
+
+if (category === 'organisation') {
+  tenantName = organisationName;
+}
+
     // Prepare signup details
     const signupdetails = {
-      tenant,
-      fullname: fullname || null,
-      organisation: organisation || null,
+      category,
+      tenantName,
+      fullname,
+      //organisation: organisationName || null,
       email,
       password,
+  
     };
 
     // Make POST request to backend for registering signup details
@@ -86,11 +99,11 @@ const Signup = () => {
       <h2>Sign up</h2>
       <form className="signup-form" onSubmit={handleSignup}>
         {/* Category selection dropdown */}
-        <label htmlFor="tenant">Select Category:</label>
+        <label htmlFor="category">Select Category:</label>
         <select
-          name="tenant"
-          value={tenant}
-          onChange={(e) => setTenant(e.target.value)}
+          name="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
           required
         >
           <option value="">Select Category</option>
@@ -99,22 +112,20 @@ const Signup = () => {
         </select>
 
         {/* Organisation name input, shown only if 'organisation' is selected */}
-        {tenant === 'organisation' && (
+        {category === 'organisation' && (
           <>
             <label htmlFor="organisation">Organisation:</label>
             <input
               type="text"
               name="organisation"
               placeholder="Enter organisation name "
-              value={organisation}
-              onChange={(e) => setOrganisation(e.target.value)}
+              value={organisationName}
+              onChange={(e) => setOrganisationName(e.target.value)}
               required
             />
           </>
         )}
-        {/* Full name input, shown only if 'individualuser' is selected */}
-        {tenant === 'individualuser' && (
-          <>
+       
             <label htmlFor="fullname">Full Name:</label>
             <input
               type="text"
@@ -124,8 +135,7 @@ const Signup = () => {
               onChange={(e) => setFullname(e.target.value)}
               required
             />
-          </>
-        )}
+         
 
         {/* Email input */}
         <label htmlFor="email">Email:</label>
