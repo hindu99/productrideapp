@@ -54,7 +54,7 @@ Acceptance Criteria:
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7
       })
@@ -84,7 +84,15 @@ Acceptance Criteria:
     }
 
     // Send the reply back to the client
-    return res.json({ reply });
+    // Split the AI response into refined requirement and acceptance criteria
+const [_, refinedPart, criteriaPart] = reply.split(/Refined Requirement:|Acceptance Criteria:/);
+
+// Clean whitespace and send structured response
+return res.json({
+  requirement: refinedPart?.trim() || '',
+  acceptanceCriteria: criteriaPart?.trim() || ''
+});
+
 
   } catch (error) {
     // network error handler
