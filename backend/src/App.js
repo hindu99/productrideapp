@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 import { connectDB} from './config/dbconfig.js';
  // Importing the database configuration from config/dbconfig.js
 import requirementBoxRoutes from './routes/authentication/requirementbox.js';
-import signup from './routes/authentication/auth.js'
+import authRoutes from './routes/authentication/auth.js'
+
 
 
 dotenv.config();
@@ -29,7 +30,8 @@ app.use(express.json());
 
 // Routes
 app.use('/api', requirementBoxRoutes);
-app.use('/api', signup)
+app.use('/api', authRoutes)
+
 
 app.get('/api', (req, res) => {
   res.json({ message: 'Hello from Express backend!' });
