@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import './requirementbugwriting.css';
+import { useNavigate } from "react-router-dom";
+
+
 
 const RequirementWriting = () => {
   const [requirements, setRequirements] = useState('');
   const[error,setError]= useState('')
   const[apierror,setApiError] =useState('')
+  
+//for using routing 
+const navigate = useNavigate();
 
   const handleRequirement = async (e) => {
     e.preventDefault();
@@ -34,11 +40,17 @@ const RequirementWriting = () => {
 
       const data = await response.json();
       console.log (data);
+  navigate('/requirementpage', {
+    state: {
+      requirement: data.requirement,
+      acceptanceCriteria: data.acceptanceCriteria
+    }
+  });
 
-        
-    } catch (error) {
-        console.log(error)
-        setApiError ('An error occured while adding your input pleae try again ')
+    
+} catch (error) {
+    console.log(error)
+    setApiError ('An error occured while adding your input pleae try again ')
 
         
     }

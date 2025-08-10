@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   padding: 3rem;
-  background-color: #ffffff;
+  background-color: #f5f7fa;
 
   /* This is to make the container corners rounded and to give a showdow border effect */
   border-radius: 1rem; /* Rounded corners */
@@ -33,7 +33,7 @@
   font-size: 1rem;
   padding: 1rem;
   resize: none; 
-  border: 1px solid #cde1f7;
+  border: 1px solid #007bff;
   border-radius: 5px;
   box-sizing: border-box;
 }

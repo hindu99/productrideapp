@@ -1,0 +1,139 @@
+/* requirements-page.css */
+
+/* Three-column grid to center the main form and keep details on the right
+   - Col 1: flexible spacer
+   - Col 2: main form (Title, Requirements, Acceptance Criteria)
+   - Col 3: right details panel (Assignee, Status, RICE, etc) */
+.requirements-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(720px, 960px) 320px;
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* no top padding so it aligns exactly with content-area's top padding */
+  padding: 3rem 2rem 2.5rem 2rem;
+
+  background-color: #f9fafb;
+
+  /* <<< important: align both columns to the very top >>> */
+  align-items: start;
+}
+
+/* Middle: main form container (large, centered) */
+.req-main-panel {
+  grid-column: 2;
+  background: #ffffff;
+  padding: 1rem;                        /* padding prevents margin-collapsing tricks */
+  border-radius: 1rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  /* <<< kill any accidental top margin so it doesn't sink below the sticky panel >>> */
+  margin-top: 0; /* Remove top margin for alignment */
+}
+.req-main-panel > .input-group:first-child {
+  margin-top: 0;                          /* belt & suspenders */
+}
+
+/* Right: details panel (sticky under the top bar) */
+.req-side-panel {
+  grid-column: 3;
+  background-color: #f3f4f6;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  align-self: start;
+  position: sticky;
+  top: 52px; /* Match the height of your top bar for alignment */
+  z-index: 20;                            /* stay above the main bg but under the topbar */
+}
+
+/* Shared input styles */
+.input-group {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #111827;
+}
+
+.title-input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.title-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+.chatgpt-textarea {
+  width: 100%;
+  min-height: 240px;
+  padding: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  outline: none;
+  resize: vertical;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.chatgpt-textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Buttons */
+.save-btn,
+.edit-btn {
+  padding: 0.75rem 1.5rem;
+  margin-right: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.save-btn { background-color: #3b82f6; color: white; }
+.edit-btn { background-color: #e5e7eb; color: #111827; }
+
+/* Responsive: stack when screen is narrow */
+@media (max-width: 1200px) {
+  .requirements-container {
+    grid-template-columns: minmax(0, 1fr) minmax(600px, 1fr) 320px;
+  }
+}
+
+@media (max-width: 980px) {
+  .requirements-container {
+    grid-template-columns: 1fr; /* single column stack */
+  }
+  .req-main-panel {
+    grid-column: 1;
+    order: 1;
+    margin-top: 0; /* keep flush */
+  }
+  .req-side-panel {
+    grid-column: 1;
+    order: 2;
+    position: static; /* no sticky in stacked mode */
+    top: auto;
+  }
+}
