@@ -34,62 +34,55 @@ const Login = () => {
 
    try{
     const response = await fetch ('http://localhost:5000/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(logindetails),
-    });
-    const data=await response.json();
-    if (response.ok) { 
-      // Handle successful login
-      console.log('Login successful:', data);
-      // Redirect to dashboard or home page
-      window.location.href = '/dashboard';
-    } else {
-      // Handle login error
-      setError(data.message || 'Login failed. Please try again.');
-    }   
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(logindetails),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        //If the user name and password is correct then the created token from node backend is getting stored locally by this code 
+        localStorage.setItem('token', data.token);
 
-   }
-   catch (err) {  
+        // Hence the login is scuccesfull redirecting the user to the dashboard 
+        window.location.href = '/requirementbox';
+      } else {
+        setError(data.message || 'Login failed. Please try again.');
+      }
+    } catch (err) {
       console.error('Login error:', err);
-      setError('An error occurred while logging in. Please contact your administrator.');
+      setError('An unexpected error occurred. Please try again.');
+    }
+  };
 
-   }
-
-
-
- };
 
   return (
     <div className="login-container">
-      <div className="logo">Product Logo</div>
+      <img className="logo" src="/src/assets/Logo/product_ride_compact.png" alt="Product Logo" />
       <h2>Login</h2>
       <form className="login-form" onSubmit={handleLogin}>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
+      <label htmlFor="email">Email:</label>
+      <input
+        type="email"
+        placeholder="Enter Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+      <label htmlFor="password">Password:</label>
+      <input
+        type="password"
+        placeholder="Enter Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+        </form>
       {error && <div className="error-message">{error}</div>}
-      <div className="auth-actions">
-        <button type="button" onClick={() => window.location.href = '/signup'}>Sign up</button>
-        <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
-      </div>
+      <button type="submit">Login</button>
+      <button onClick={() => window.location.href = '/signup'}>Register</button>
+      <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
     </div>
   );
 };
 
-export default Login ;
+export default Login;
