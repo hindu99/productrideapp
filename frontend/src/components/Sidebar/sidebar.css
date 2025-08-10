@@ -1,0 +1,65 @@
+/* Sidebar main container styles
+   - Fixed under the full-width top bar
+   - Width is driven by CSS var --sidebar-width set by Layout */
+.side-menu {
+  position: fixed;
+  top: var(--topbar-height);                  /* Sidebar starts below the top bar */
+  left: 0;
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--topbar-height));
+  background-color: #ffffff;
+  color: #111827;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.06);  /* Subtle shadow for separation */
+  transition: width 0.3s ease;
+  z-index: 30;                                /* Under the top bar (z=40) */
+}
+
+/* Collapsed/expanded classes exist for clarity; width is handled by CSS var */
+.side-menu.open {}
+.side-menu.collapsed {}
+
+/* Toggle button for sidebar collapse/expand */
+.toggle-btn {
+  background-color: #e5efff;
+  color: #111827;
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  border: none;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Sidebar menu list styles */
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar menu item styles */
+.menu-item {
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+/* Hover effect for menu items */
+.menu-item:hover {
+  background-color: #eef6ff;
+}
+
+/* Active menu item style */
+.menu-item.active {
+  background-color: #e0f0ff;
+  font-weight: 700;
+}
+
+/* In rail (collapsed) mode, we avoid transforms to prevent jitter in tight widths */
+.menu-item.rail:hover {
+  background-color: #eef6ff;
+}

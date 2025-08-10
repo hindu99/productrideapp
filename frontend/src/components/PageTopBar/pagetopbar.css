@@ -1,0 +1,67 @@
+:root {
+  --topbar-height: 52px; /* single source of truth for top bar height */
+}
+
+.topbar {
+  width: 100%;
+  height: var(--topbar-height);
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+}
+
+/* Logo container styles */
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Logo image styles */
+.topbar-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+/* Actions section styles */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-button {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+.topbar-button:hover {
+  background: #f0f0f0;
+}
+
+.topbar-profile {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+}

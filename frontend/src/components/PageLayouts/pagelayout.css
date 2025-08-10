@@ -1,0 +1,42 @@
+/* This is the CSS for pagelayout */
+/*This is the main body,height has to be kept as fit-content*/
+html, body {
+  height: fit-content;
+}
+body {
+  margin: 0;
+}
+
+/* Layout variables shared across the app */
+.layout-container {
+  --topbar-height: 52px;                  /* same height as top bar */
+  --sidebar-width: 200px;                 /*same width as sidebar*/
+  /* Below line is used to define the space between the main content and the top bar */
+  --content-top-gap: calc(var(--topbar-height) + 5px);
+}
+
+/* This defines the width of the side bar and collapsed stage */
+.layout-container.collapsed {
+  --sidebar-width:45 px;
+}
+
+
+
+/* Main scrolling content area
+   - Sits to the right of the fixed sidebar
+   - Starts just below the fixed top bar using the SAME offset the sticky panel uses */
+.content-area {
+  min-height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  background: #fafafa;
+
+  /* spacing */
+  margin-left: var(--sidebar-width);      /* sidebar width to start after sidebar */
+  margin-top: auto;
+  padding: 24px;
+  padding-top: var(--content-top-gap);    /* clear the fixed top bar (shared with sticky) */
+
+  transition: margin-left 0.3s ease;
+}
