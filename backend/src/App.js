@@ -5,6 +5,7 @@ import { connectDB} from './config/dbconfig.js';
  // Importing the database configuration from config/dbconfig.js
 import requirementBoxRoutes from './routes/authentication/requirementbox.js';
 import authRoutes from './routes/authentication/auth.js'
+import createNonAminUserRoutes from './routes/adminpages/createnonadminuser.js'
 
 
 
@@ -31,6 +32,7 @@ app.use(express.json());
 // Routes
 app.use('/api', requirementBoxRoutes);
 app.use('/api', authRoutes)
+app.use('/api', createNonAminUserRoutes)
 
 
 app.get('/api', (req, res) => {

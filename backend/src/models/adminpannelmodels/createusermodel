@@ -1,0 +1,37 @@
+import { connectDB, mssql } from '../../config/dbconfig.js';
+
+
+// Model functions for admin panel user creation
+
+
+/**
+ This creates a non admin user on the databse user table 
+ */
+export const createNonAdminUser = async ({ tenantId, fullname, email, password,role }) => {
+  const pool = await connectDB();
+  await pool.request()
+    .input('tenantID', mssql.VarChar, tenantId )
+    .input('fullname', mssql.VarChar, fullname )
+    .input('email', mssql.VarChar, email)
+    .input('password', mssql.VarChar, password)
+    .input('role', mssql.VarChar, role) 
+    .query(`
+      INSERT INTO users (tenant_id,fullname,email, password,role)
+      VALUES (@tenantID, @fullname, @email, @password,@role)
+    `);
+};
+
+/**
+ *This search the user in the database based on eamil and return the user table details 
+ */
+export const findUserByEmail = async (email) => {
+  const pool = await connectDB();
+  const result = await pool.request()
+    .input('email', mssql.VarChar, email)
+    .query('SELECT * FROM users WHERE email = @email');
+  return result.recordset[0];
+};
+
+
+
+
