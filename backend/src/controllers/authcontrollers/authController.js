@@ -48,9 +48,10 @@ const login=async(req,res)=>{
 
     const JWTtokendetails = {
       userId: userdetailes.userID,  
-      tenantId: userdetailes.tenantID,
+      tenantId: userdetailes.tenant_id,
       email: userdetailes.email,
       fullname: userdetailes.fullname,
+      role:userdetailes.role,
     };
 
     const token = jwt.sign(JWTtokendetails, process.env.JWT_SECRET, {
