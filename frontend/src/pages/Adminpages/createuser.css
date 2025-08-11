@@ -1,0 +1,74 @@
+
+
+/* User Registration Page Styles */
+
+/* Main container for the registration form */
+.userregistration-container {
+  background: #f5f7f8;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  max-width: 90%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Logo image styling */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  color: #333;
+}
+
+/* Registration form styling */
+.UserRegistration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+/* Input field styling */
+.UserRegistration-form input,
+.UserRegistration-form select {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+/* Focused input field and select box styling */
+.UserRegistration-form input:focus,
+.UserRegistration-form select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Submit button styling */
+button {
+  padding: 10px;
+  font-size: 15px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+}
+
+/* Submit button hover effect */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Error message styling */
+.error-message {
+  color: #d9534f;
+  font-size: 14px;
+}
+
+
