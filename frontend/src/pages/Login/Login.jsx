@@ -76,9 +76,10 @@ const Login = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <button type="submit">Login</button>
         </form>
       {error && <div className="error-message">{error}</div>}
-      <button type="submit">Login</button>
+
       <button onClick={() => window.location.href = '/signup'}>Register</button>
       <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
     </div>
