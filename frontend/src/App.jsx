@@ -7,6 +7,9 @@ import Requirementpage from './pages/Requirementpage/requirementpage.jsx';
 import RequirementWriting from './components/RequirmentBugWritingBox/requirmentbugwritingbox.jsx';
 import Sidebar from './components/Sidebar/sidebar.jsx';
 import Pagelayout from './components/PageLayouts/pagelayout.jsx'
+import Createusers from './pages/Adminpages/createuser.jsx';
+import Adminmainpage from './pages/Adminpages/adminmain.jsx';
+
 
 
 
@@ -19,7 +22,9 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/requirementbox" element={<RequirementWriting />} />
-        <Route path="/requirementpage" element={<Requirementpage />} />|*
+        <Route path="/adminmainpage" element={<Adminmainpage />} />
+        <Route path="/requirementpage" element={<Requirementpage />} />
+        <Route path="/createnonadminuser" element={<Createusers />} />|
       </Routes>
     </Router>
   );
