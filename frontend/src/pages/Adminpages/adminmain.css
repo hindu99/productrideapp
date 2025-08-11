@@ -1,0 +1,34 @@
+/* Admin Main Page Styles */
+
+/* Main container for the admin dashboard */
+.admin-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 50px;
+}
+
+/* Heading styles for the dashboard */
+h1 {
+  /* Add your heading styles here (e.g., font-size, color, margin) */
+}
+
+/* Button styles for the dashboard */
+.dashboard-container button {
+  background-color: lightblue; /* Light blue background for buttons */
+  color: white; /* White text color for buttons */
+  border: none; /* No border for buttons */
+  padding: 12px 24px; /* Padding inside buttons */
+  font-size: 18px; /* Font size for button text */
+  border-radius: 8px; /* Rounded corners for buttons */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Button hover effect */
+.dashboard-container button:hover {
+  background-color: darkblue; /* Dark blue background on hover */
+}
+
+/* Add more comments and style blocks as you expand your dashboard */
