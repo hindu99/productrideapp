@@ -95,7 +95,7 @@ if (category === 'organisation') {
   //CSS is for this is in signup.css
   return (
     <div className="signup-container">
-      <div className="logo">Product Logo</div>
+      <img className="logo" src="/src/assets/Logo/product_ride_compact.png" alt="Product Logo" />
       <h2>Sign up</h2>
       <form className="signup-form" onSubmit={handleSignup}>
         {/* Category selection dropdown */}
