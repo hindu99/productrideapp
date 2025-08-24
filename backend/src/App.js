@@ -6,6 +6,10 @@ import { connectDB} from './config/dbconfig.js';
 import requirementBoxRoutes from './routes/authentication/requirementbox.js';
 import authRoutes from './routes/authentication/auth.js'
 import createNonAminUserRoutes from './routes/adminpages/createnonadminuser.js'
+import createProjectrRoutes from './routes/adminpages/createproject.js'
+import userqueryroute from './routes/Userquery/userqueryroute.js'
+import requirements from './routes/Requirmenthandling/requirementpage.js'
+import projectqueryroute from './routes/projectqueryroute/projectquery.js'
 
 
 
@@ -33,6 +37,10 @@ app.use(express.json());
 app.use('/api', requirementBoxRoutes);
 app.use('/api', authRoutes)
 app.use('/api', createNonAminUserRoutes)
+app.use('/api', createProjectrRoutes)
+app.use('/api', userqueryroute)
+app.use('/api', requirements)
+app.use('/api', projectqueryroute)
 
 
 app.get('/api', (req, res) => {
