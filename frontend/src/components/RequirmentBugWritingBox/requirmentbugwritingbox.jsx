@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import './requirementbugwriting.css';
 import { useNavigate } from "react-router-dom";
+import Layout from "../PageLayouts/pagelayout";
+
 
 
 
@@ -59,6 +61,7 @@ const navigate = useNavigate();
   };
 
   return (
+    <Layout>
     <div className='requirmentbugwritingbox'>
         <h1>Description</h1>
          {/* Form for entering a requirement or bug description */}
@@ -82,6 +85,7 @@ const navigate = useNavigate();
       
 
     </div>
+    </Layout>
   );
 };
 
