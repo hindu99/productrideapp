@@ -47,7 +47,7 @@ const login=async(req,res)=>{
     }
 
     const JWTtokendetails = {
-      userId: userdetailes.userID,  
+      userId: userdetailes.user_id,  
       tenantId: userdetailes.tenant_id,
       email: userdetailes.email,
       fullname: userdetailes.fullname,
