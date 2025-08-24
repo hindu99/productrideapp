@@ -1,0 +1,92 @@
+/* Project Creation Page Styles */
+
+/* Main container for the project creation form */
+.projectregistration-container {
+  background: #f5f7f8;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  max-width: 90%;
+  box-sizing: border-box;
+  text-align: center;
+  /* Improve font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Logo image styling */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  color: #333;
+}
+
+/* Heading styling */
+.projectregistration-container h2 {
+  margin-bottom: 20px; /* space below heading */
+  color: #333; /* dark text */
+  font-weight: 600; /* semi-bold */
+}
+
+/* Project creation form styling */
+.ProjectRegistration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+  text-align: left; /* align inputs and labels left */
+}
+
+/* Input field and textarea styling */
+.ProjectRegistration-form input,
+.ProjectRegistration-form textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.2s ease-in-out;
+  font-family: inherit;
+  resize: vertical; /* allow vertical resize only on textarea */
+}
+
+/* Focused input field and textarea styling */
+.ProjectRegistration-form input:focus,
+.ProjectRegistration-form textarea:focus {
+  border-color: #007bff;
+  outline: 3px solid #80bdff;
+  outline-offset: 2px;
+}
+
+/* Submit button styling */
+button {
+  padding: 10px;
+  font-size: 15px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+}
+
+/* Submit button hover effect */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Disabled submit button styling */
+button:disabled {
+  background-color: #a0c4ff;
+  cursor: not-allowed;
+}
+
+/* Error message styling */
+.error-message {
+  color: #d9534f;
+  font-size: 14px;
+  margin-top: -8px; /* move error message closer to input */
+  margin-bottom: 10px;
+}
