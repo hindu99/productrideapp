@@ -1,8 +1,13 @@
 import express from 'express';
-import { handleRequirementData } from '../../controllers/requirementhandlingcontroller/requirementhandlingcontroller.js';
+import { createrequirement } from '../../controllers/Requirementhandlingcontroller/requirementhandlingcontroller.js';
+import authMiddleware from '../../middleware/authmiddleware.js';
 
+// Create a new Express router for admin user creation routes
 const router = express.Router();
 
-router.post('/requirementdata', handleRequirementData); 
+// Route to create a non-admin user
+// This route is executing authMiddleware to extract the JWT token details
+router.post('/requirementdata', authMiddleware, createrequirement);
 
-export default router; 
+// Export the router to be used in the main app
+export default router;

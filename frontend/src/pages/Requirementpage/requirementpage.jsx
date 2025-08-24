@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+// This file contains React component code for the Requirement Page.
+// The Requirement Page is used to display and manage requirements for a project.
+// It typically includes a form for entering requirements, a details panel, and may use state and effect hooks.
+
+
+import React, { useState, useEffect } from 'react';  // added useEffect
 import { useLocation, useNavigate } from 'react-router-dom';
-import Layout from "../../components/PageLayouts/pagelayout"; // check filename casing
+import Layout from "../../components/PageLayouts/pagelayout"; 
 import './requirementpage.css';
+import { addToken } from '../../HelperFunctions/addtoken';
 
 /*
   Requirements screen: confirm title/requirement/acceptance criteria
@@ -21,6 +27,7 @@ const RequirementsPage = () => {
 
   const [sprint, setSprint] = useState('');
   const [assignee, setAssignee] = useState('');
+  const [project, setProject] = useState('');
   const [status, setStatus] = useState('In Backlog');
 
   // RICE (store as strings; convert on submit)
@@ -34,6 +41,62 @@ const RequirementsPage = () => {
   // For error display
   const [apiError, setApiError] = useState(null);
 
+  // New state to hold users list
+  const [users, setUsers] = useState([]);
+
+  // New state to hold projects list
+  const [projects, setProjects] = useState([]);
+
+  // Fetch users on component mount
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/findusers', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            //Using the function from helper function "addtoken.js" below, we are adding the JWT token to the request 
+            ...addToken(), 
+          },
+        });
+        if (!response.ok) throw new Error('Failed to fetch users');
+        const data = await response.json();
+        console.log('Fetched users:', data);
+
+        setUsers(data);
+      } catch {
+        setApiError('Could not load users. Please try again later.');
+      }
+    };
+    fetchUsers();
+
+  }, []);
+
+  // Fetch projects on component mount
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/findprojects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            //Using the function from helper function "addtoken.js" below, we are adding the JWT token to the request 
+            ...addToken(), 
+          },
+        });
+        if (!response.ok) throw new Error('Failed to fetch projects');
+        const data = await response.json();
+        console.log('Fetched projects:', data);
+
+        setProjects(data);
+      } catch {
+        setApiError('Could not load projects. Please try again later.');
+      }
+    };
+    fetchProjects();
+
+  }, []);
+
   const handleSave = async () => {
     const payload = {
       title,
@@ -41,6 +104,7 @@ const RequirementsPage = () => {
       acceptanceCriteria: acceptanceCriteriaText,
       sprint,
       assignee,
+      project,
       status,
       reach: Number(reach || 0),
       impact: Number(impact || 0),
@@ -52,7 +116,10 @@ const RequirementsPage = () => {
     try {
       const response = await fetch('http://localhost:5000/api/requirementdata', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...addToken(), // Spread token headers here inside headers object
+        },
         body: JSON.stringify(payload),
       });
 
@@ -60,11 +127,12 @@ const RequirementsPage = () => {
 
       if (response.ok) {
         // Go home (router-friendly)
-        navigate('/');
+        alert('Requirement added successfully')
+        navigate('/requirementpage');
       } else {
         setApiError(data.message || 'Something went wrong, please try again.');
       }
-    } catch (err) {
+    } catch {
       setApiError('An error occurred while adding the requirement. Please contact your administrator.');
     }
   };
@@ -91,9 +159,27 @@ const RequirementsPage = () => {
               className="title-input"
             >
               <option value="">Unassigned</option>
-              <option value="Dev1">Dev1</option>
-              <option value="Dev2">Dev2</option>
-              <option value="Tester1">Tester1</option>
+              {users.map(user => (
+                <option key={user.user_id} value={user.user_id}>
+                  {user.fullname}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label className="input-label">Project</label>
+            <select
+              value={project}
+              onChange={(e) => setProject(e.target.value)}
+              className="title-input"
+            >
+              <option value="">Unassigned</option>
+              {projects.map(proj => (
+                <option key={proj.project_id} value={proj.project_id}>
+                  {proj.project_name}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -172,7 +258,7 @@ const RequirementsPage = () => {
 
         {/* ===== Right container: main form ===== */}
         <section className="req-main-panel">
-          <div className="input-group">
+       <div className="input-group">*
             <label className="input-label">Title</label>
             <input
               type="text"
@@ -201,7 +287,7 @@ const RequirementsPage = () => {
               className="chatgpt-textarea"
               placeholder="List clear, testable acceptance criteria"
             />
-          </div>
+         // </div>
         </section>
       </div>
     </Layout>

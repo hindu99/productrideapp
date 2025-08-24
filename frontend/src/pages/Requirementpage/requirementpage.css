@@ -6,7 +6,7 @@
    - Col 3: right details panel (Assignee, Status, RICE, etc) */
 .requirements-container {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(720px, 960px) 320px;
+  grid-template-columns: minmax(0, 1fr) minmax(720px, 1500px) 320px;
   gap: 2rem;
   width: 100%;
   box-sizing: border-box;
@@ -114,6 +114,12 @@
 .save-btn { background-color: #3b82f6; color: white; }
 .edit-btn { background-color: #e5e7eb; color: #111827; }
 
+/* <<< NEW: force both panels into the first row >>> */
+.req-main-panel,
+.req-side-panel {
+  grid-row: 1;
+}
+
 /* Responsive: stack when screen is narrow */
 @media (max-width: 1200px) {
   .requirements-container {
@@ -124,6 +130,10 @@
 @media (max-width: 980px) {
   .requirements-container {
     grid-template-columns: 1fr; /* single column stack */
+  }
+  .req-main-panel,
+  .req-side-panel {
+    grid-row: auto; /* reset row forcing */
   }
   .req-main-panel {
     grid-column: 1;
