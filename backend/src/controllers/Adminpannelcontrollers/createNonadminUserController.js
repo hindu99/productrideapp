@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import { createNonAdminUser, findUserByEmail } from '../../models/adminpannelmodels/createusermodel';
-import authMiddleware from '../middleware/authmiddleware.js';
+
 
 // Load environment variables from .env file
 dotenv.config();

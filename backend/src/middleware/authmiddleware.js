@@ -27,6 +27,7 @@ function authMiddleware(req, res, next) {
     //This is getting used in createNonadminUserController
     req.tenantId = decoded.tenantId;
     req.role = decoded.role;
+    req.userId=decoded.userId
     req.user = decoded; // save entire decoded info if needed
     
 
