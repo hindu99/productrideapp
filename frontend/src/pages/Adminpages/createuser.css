@@ -11,7 +11,7 @@
   width: 450px;
   max-width: 90%;
   box-sizing: border-box;
-  text-align: center;
+  text-align: left;
 }
 
 /* Logo image styling */
@@ -31,21 +31,26 @@
 }
 
 /* Input field styling */
-.UserRegistration-form input,
+
 .UserRegistration-form select {
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
   transition: border-color 0.2s ease-in-out;
+  
 }
 
+
+
 /* Focused input field and select box styling */
-.UserRegistration-form input:focus,
+
 .UserRegistration-form select:focus {
   border-color: #007bff;
   outline: none;
 }
+
+
 
 /* Submit button styling */
 button {
