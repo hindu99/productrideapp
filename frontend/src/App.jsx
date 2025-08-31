@@ -12,6 +12,7 @@ import Createprojects from './pages/Adminpages/createproject.jsx';
 
 import Adminmainpage from './pages/Adminpages/adminmain.jsx';
 import Board from './pages/Kanbanboard/board.jsx';
+import Entrypage from './pages/Entrypage/entrypage.jsx';
 
 
 
@@ -50,6 +51,7 @@ function App() {
         <Route path="/createproject" element={<Createprojects />} />
         <Route path="/createnonadminuser" element={<Createusers />} />|
         <Route path="/Board" element={<Board />} />|
+        <Route path="/entrypage" element={<Entrypage />} />|
       </Routes>
     </Router>
   );

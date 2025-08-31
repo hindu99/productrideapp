@@ -1,0 +1,95 @@
+/*
+  entrypage.css
+  Provides layout, card, form, and button styling for a clean entry experience.
+*/
+.entry-wrap {
+/* Entry page wrapper and card layout */
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #f6f7fb;
+  padding: 24px;
+}
+
+.entry-card {
+  width: 100%;
+  max-width: 560px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+  padding: 28px;
+}
+
+.entry-title {
+/* Entry page titles and subtitles */
+  margin: 0 0 8px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.entry-subtitle {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.entry-field {
+/* Entry form fields and labels */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 12px 0 20px;
+}
+
+.entry-label {
+  font-size: 13px;
+  color: #334155;
+}
+
+.entry-actions {
+/* Entry form actions and buttons */
+  display: flex;
+  justify-content: flex-end; 
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.entry-btn {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #0ea5e9;
+  color: #fff;
+  transition: transform 0.02s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.entry-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.entry-btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* to make project selct look good */
+/* Project select dropdown styling */
+.title-input {
+  width: 100%;
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 8px 10px;
+  font-size: 14px;
+  outline: none;
+  background: #fff; /* ensure white background on some themes */
+}
+
+.title-input:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+}
