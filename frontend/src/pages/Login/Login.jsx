@@ -46,7 +46,7 @@ const Login = () => {
         localStorage.setItem('token', data.token);
 
         // Hence the login is scuccesfull redirecting the user to the dashboard 
-        window.location.href = '/requirementbox';
+        window.location.href = '/entrypage';
       } else {
         setError(data.message || 'Login failed. Please try again.');
       }
