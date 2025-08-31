@@ -30,4 +30,11 @@ export default [
       ],
     },
   },
+  // Add Jest globals for test files
+  {
+    files: ['**/*.test.js', '**/*.test.jsx', '**/__tests__/**/*.js', '**/__tests__/**/*.jsx'],
+    languageOptions: {
+      globals: { ...globals.jest, global: 'writable' },
+    },
+  },
 ]
