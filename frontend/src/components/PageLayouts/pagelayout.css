@@ -29,14 +29,18 @@ body {
   min-height: 100vh;
   overflow-y: auto;
   box-sizing: border-box;
-
   background: #fafafa;
 
-  /* spacing */
-  margin-left: var(--sidebar-width);      /* sidebar width to start after sidebar */
-  margin-top: auto;
-  padding: 24px;
-  padding-top: var(--content-top-gap);    /* clear the fixed top bar (shared with sticky) */
+  /* start after the sidebar */
+  margin-left: var(--sidebar-width);
+  /* push below topbar */
+  margin-top: var(--content-top-gap);
 
-  transition: margin-left 0.3s ease;
+  /*to fill the full sapce*/
+  width: calc(100vw - var(--sidebar-width));
+
+  /* spacing */
+  padding: 24px;
+
+  transition: margin-left 0.3s ease, width 0.3s ease;
 }
