@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Layout from "../../components/PageLayouts/pagelayout"; 
 import './requirementpage.css';
 import { addToken } from '../../HelperFunctions/addtoken';
+import ProjectSelect from "../../components/SelectionDropdowns/projectselector.jsx";
 
 /*
   Requirements screen: confirm title/requirement/acceptance criteria
@@ -44,8 +45,6 @@ const RequirementsPage = () => {
   // New state to hold users list
   const [users, setUsers] = useState([]);
 
-  // New state to hold projects list
-  const [projects, setProjects] = useState([]);
 
   // Fetch users on component mount
   useEffect(() => {
@@ -64,6 +63,12 @@ const RequirementsPage = () => {
         console.log('Fetched users:', data);
 
         setUsers(data);
+
+
+
+
+
+
       } catch {
         setApiError('Could not load users. Please try again later.');
       }
@@ -72,30 +77,6 @@ const RequirementsPage = () => {
 
   }, []);
 
-  // Fetch projects on component mount
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/findprojects', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            //Using the function from helper function "addtoken.js" below, we are adding the JWT token to the request 
-            ...addToken(), 
-          },
-        });
-        if (!response.ok) throw new Error('Failed to fetch projects');
-        const data = await response.json();
-        console.log('Fetched projects:', data);
-
-        setProjects(data);
-      } catch {
-        setApiError('Could not load projects. Please try again later.');
-      }
-    };
-    fetchProjects();
-
-  }, []);
 
   const handleSave = async () => {
     const payload = {
@@ -169,18 +150,7 @@ const RequirementsPage = () => {
 
           <div className="input-group">
             <label className="input-label">Project</label>
-            <select
-              value={project}
-              onChange={(e) => setProject(e.target.value)}
-              className="title-input"
-            >
-              <option value="">Unassigned</option>
-              {projects.map(proj => (
-                <option key={proj.project_id} value={proj.project_id}>
-                  {proj.project_name}
-                </option>
-              ))}
-            </select>
+          <ProjectSelect value={project} onChange={setProject} />
           </div>
 
           <div className="input-group">
@@ -258,7 +228,7 @@ const RequirementsPage = () => {
 
         {/* ===== Right container: main form ===== */}
         <section className="req-main-panel">
-       <div className="input-group">*
+       <div className="input-group">
             <label className="input-label">Title</label>
             <input
               type="text"
@@ -287,7 +257,7 @@ const RequirementsPage = () => {
               className="chatgpt-textarea"
               placeholder="List clear, testable acceptance criteria"
             />
-         // </div>
+          </div>
         </section>
       </div>
     </Layout>
