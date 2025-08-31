@@ -1,22 +1,30 @@
 import React from 'react';
 import './pagetopbar.css'; // CSS file import
+import { handleLogout } from '../Logout/logout';
 
-// Top bar is used in the page layput for most of the app screens.
 const TopBar = () => {
+
+
   return (
-    // Header bar container with custom CSS class
     <header className="topbar" role="banner">
       {/* Logo or Brand section */}
       <div className="topbar-logo">
-        <img src="/src/assets/Logo/product_ride_compact.png" alt="Product Logo" className="topbar-logo-img" />
+        <img
+          src="/src/assets/Logo/product_ride_compact.png"
+          alt="Product Logo"
+          className="topbar-logo-img"
+        />
       </div>
 
-      {/* Right side: actions such as Docs, Support, and Profile */}
+      {/* Top bar right side corner */}
       <div className="topbar-actions">
         {/* Navigation button for Docs */}
         <button className="topbar-button">Docs</button>
-        {/* Navigation button for Support */}
-        <button className="topbar-button">Support</button>
+
+        {/* Logout button */}
+        <button className="topbar-button" onClick={handleLogout}>
+          Logout
+        </button>
 
         {/* Profile circle with user initial */}
         <div className="topbar-profile" aria-label="User profile">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Login from  './pages/Login/Login.jsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -19,6 +19,25 @@ import Board from './pages/Kanbanboard/board.jsx';
 
 function App() {
   //const [count, setCount] = useState(0)
+
+/*This function multitablogout is used for multitab logout, in case if a user press Logot
+*Then the Logout function will remove tokern and projecct Id
+*Then because there is a chnage in the storage this gets activated 
+*If no token in storage main app will direct everything to login page
+
+*/
+  useEffect(() => {
+  const multitablogout = (e) => {
+    if (e.key === 'token' && !e.newValue) {
+      // If token is cleard all the tabs will be directed to loginpage 
+      window.location.href = '/';
+    }
+  };
+//check for change in storage 
+  window.addEventListener('storage', multitablogout);
+  return () => window.removeEventListener('storage', multitablogout);
+}, []);
+
 
   return (
     <Router>
