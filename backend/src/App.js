@@ -10,6 +10,9 @@ import createProjectrRoutes from './routes/adminpages/createproject.js'
 import userqueryroute from './routes/Userquery/userqueryroute.js'
 import requirements from './routes/Requirmenthandling/requirementpage.js'
 import projectqueryroute from './routes/projectqueryroute/projectquery.js'
+import boardqueryroute from './routes/Kanbanboard/kanbanboard.js'
+import cardstatusupdate from './routes/Kanbanboard/cardstatusupdate.js'
+
 
 
 
@@ -41,6 +44,8 @@ app.use('/api', createProjectrRoutes)
 app.use('/api', userqueryroute)
 app.use('/api', requirements)
 app.use('/api', projectqueryroute)
+app.use('/api', boardqueryroute)
+app.use('/api', cardstatusupdate)
 
 
 app.get('/api', (req, res) => {
