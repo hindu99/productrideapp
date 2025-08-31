@@ -8,7 +8,11 @@ import RequirementWriting from './components/RequirmentBugWritingBox/requirmentb
 import Sidebar from './components/Sidebar/sidebar.jsx';
 import Pagelayout from './components/PageLayouts/pagelayout.jsx'
 import Createusers from './pages/Adminpages/createuser.jsx';
+import Createprojects from './pages/Adminpages/createproject.jsx';
+
 import Adminmainpage from './pages/Adminpages/adminmain.jsx';
+import Board from './pages/Kanbanboard/board.jsx';
+
 
 
 
@@ -24,7 +28,9 @@ function App() {
         <Route path="/requirementbox" element={<RequirementWriting />} />
         <Route path="/adminmainpage" element={<Adminmainpage />} />
         <Route path="/requirementpage" element={<Requirementpage />} />
+        <Route path="/createproject" element={<Createprojects />} />
         <Route path="/createnonadminuser" element={<Createusers />} />|
+        <Route path="/Board" element={<Board />} />|
       </Routes>
     </Router>
   );
