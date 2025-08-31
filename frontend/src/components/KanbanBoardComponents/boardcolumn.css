@@ -1,0 +1,30 @@
+/*CSS for kanban board column*/
+
+
+
+.kb-column {
+  background: #f7f9fb;
+  display: flex;
+  flex-direction:column;
+  min-height: 600px;
+  overflow: hidden;
+ 
+
+}
+
+.kb-column-header {
+  padding: 12px 14px;
+  font-weight: 700;
+  color: #e6e8ee;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: linear-gradient(180deg, #007bff, #007bff);
+  letter-spacing: 0.2px;
+}
+
+.kb-column-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 160px;
+}
