@@ -4,11 +4,11 @@ import './sidebar.css';
 
 /* Sidebar menu items */
 const menuItems = [
-  { name: 'Dashboard', path: '/dashboard' },
+  { name: 'Dashboard', path: '/Board' },
   { name: 'Requirement Box', path: '/requirementbox' },
   { name: 'Product List', path: '/products' },
   { name: 'Users', path: '/users' },
-  { name: 'Settings', path: '/settings' },
+  { name: 'Admin', path: '/adminmainpage' },
   { name: 'Logout', path: '/logout' }
 ];
 
