@@ -9,6 +9,7 @@ import createNonAminUserRoutes from './routes/adminpages/createnonadminuser.js'
 import createProjectrRoutes from './routes/adminpages/createproject.js'
 import userqueryroute from './routes/Userquery/userqueryroute.js'
 import requirements from './routes/Requirmenthandling/requirementpage.js'
+import requirementsbyId from './routes/Requirmenthandling/requirementbyid.js'
 import projectqueryroute from './routes/projectqueryroute/projectquery.js'
 import boardqueryroute from './routes/Kanbanboard/kanbanboard.js'
 import cardstatusupdate from './routes/Kanbanboard/cardstatusupdate.js'
@@ -46,6 +47,7 @@ app.use('/api', requirements)
 app.use('/api', projectqueryroute)
 app.use('/api', boardqueryroute)
 app.use('/api', cardstatusupdate)
+app.use('/api', requirementsbyId)
 
 
 app.get('/api', (req, res) => {

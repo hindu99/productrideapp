@@ -1,5 +1,6 @@
+// controllers/requirements/requirements.controller.js
 import dotenv from 'dotenv';
-import { createRequirement } from '../../models/requirementmodel/requirementdatahandlingmodel.js';
+import { createRequirement, getRequirementById } from '../../models/requirementmodel/requirementdatahandlingmodel.js';
 
 // Load environment variables
 dotenv.config();
@@ -21,7 +22,7 @@ export const createrequirement = async (req, res) => {
     effort,
     area
   } = req.body;
-console.log(req.body)
+  console.log(req.body)
   // tenandId is collected from request
   const tenantId = req.tenantId;
   const userId=req.userId;
@@ -30,7 +31,7 @@ console.log(req.body)
   if (!title || !requirements || !acceptanceCriteria) {
     return res.status(400).json({ message: 'Title, requirements, and acceptance criteria are required.' });
   }
-    const assigneeId = assignee ? Number(assignee) : null;
+  const assigneeId = assignee ? Number(assignee) : null;
 
   // Validate assigneeId is an integer number if provided
   if (assignee && (isNaN(assigneeId) || !Number.isInteger(assigneeId))) {
@@ -64,4 +65,21 @@ console.log(req.body)
   }
 };
 
+// Controller to fetch a requirement by id (used when clicking a Kanban card)
+export const getRequirementByIdController = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id)) {
+      return res.status(400).json({ message: 'Invalid requirement id' });
+    }
 
+    const row = await getRequirementById(id);
+    if (!row) {
+      return res.status(404).json({ message: 'Requirement not found' });
+    }
+    res.json(row);
+  } catch (error) {
+    console.error('Get Requirement Error:', error);
+    res.status(500).json({ message: 'Server error during requirement fetch' });
+  }
+};

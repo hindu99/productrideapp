@@ -14,6 +14,7 @@
   cursor: grab;
   transition: transform 120ms ease, box-shadow 120ms ease, border-color 120ms ease, opacity 120ms ease;
   will-change: transform;
+  cursor: pointer;
 }
 
 /* Card hover effect for visual feedback */

@@ -1,10 +1,10 @@
+// pages/RequirementPage/requirementpage.jsx
 // This file contains React component code for the Requirement Page.
 // The Requirement Page is used to display and manage requirements for a project.
 // It typically includes a form for entering requirements, a details panel, and may use state and effect hooks.
 
-
-import React, { useState, useEffect } from 'react';  // added useEffect
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';  
+import { useLocation, useNavigate, useParams } from 'react-router-dom'; 
 import Layout from "../../components/PageLayouts/pagelayout"; 
 import './requirementpage.css';
 import { addToken } from '../../HelperFunctions/addtoken';
@@ -18,6 +18,8 @@ import ProjectSelect from "../../components/SelectionDropdowns/projectselector.j
 const RequirementsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();                 // reading :id from route
+  const isEditing = Boolean(id);              // derived state
 
   const { requirement, acceptanceCriteria } = location.state || {};
 
@@ -45,7 +47,6 @@ const RequirementsPage = () => {
   // New state to hold users list
   const [users, setUsers] = useState([]);
 
-
   // Fetch users on component mount
   useEffect(() => {
     const fetchUsers = async () => {
@@ -64,11 +65,6 @@ const RequirementsPage = () => {
 
         setUsers(data);
 
-
-
-
-
-
       } catch {
         setApiError('Could not load users. Please try again later.');
       }
@@ -77,6 +73,41 @@ const RequirementsPage = () => {
 
   }, []);
 
+  // Fetch requirement details when an :id is present (card click)
+  //When a card is clicked using the Id this part of code is making a request to the server to get the relavant requirement from database
+  useEffect(() => {
+    if (!id) return;
+    const fetchRequirement = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/requirements/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            ...addToken(),
+          },
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data?.message || 'Failed to load requirement');
+
+        // Prefill form (ensure string values for controlled inputs)
+        setTitle(data.title ?? '');
+        setRequirements(data.requirements ?? '');
+        setAcceptanceCriteriaText(data.acceptanceCriteria ?? '');
+        setSprint(data.sprint ?? '');
+        setAssignee(data.assignee != null ? String(data.assignee) : '');
+        setProject(data.project != null ? String(data.project) : '');
+        setStatus(data.status ?? 'In Backlog');
+        setReach(data.reach != null ? String(data.reach) : '');
+        setImpact(data.impact != null ? String(data.impact) : '');
+        setConfidence(data.confidence != null ? String(data.confidence) : '');
+        setEffort(data.effort != null ? String(data.effort) : '');
+        setArea(data.area ?? '');
+      } catch (err) {
+        setApiError(err.message);
+      }
+    };
+    fetchRequirement();
+  }, [id]);
 
   const handleSave = async () => {
     const payload = {
@@ -129,7 +160,7 @@ const RequirementsPage = () => {
         <aside className="req-side-panel" aria-label="Requirement details">
           <div className="input-group">
             <label className="input-label">Sprint</label>
-            <input type="text" value={sprint} readOnly className="title-input" />
+            <input type="text" value={sprint} onChange={(e)=>setSprint(e.target.value)} className="title-input" />
           </div>
 
           <div className="input-group">
@@ -150,7 +181,7 @@ const RequirementsPage = () => {
 
           <div className="input-group">
             <label className="input-label">Project</label>
-          <ProjectSelect value={project} onChange={setProject} />
+            <ProjectSelect value={project} onChange={setProject} />
           </div>
 
           <div className="input-group">
@@ -228,7 +259,7 @@ const RequirementsPage = () => {
 
         {/* ===== Right container: main form ===== */}
         <section className="req-main-panel">
-       <div className="input-group">
+          <div className="input-group">
             <label className="input-label">Title</label>
             <input
               type="text"
