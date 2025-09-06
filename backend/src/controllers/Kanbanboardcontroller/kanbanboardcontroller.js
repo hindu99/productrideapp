@@ -8,8 +8,9 @@ import { getAllRequirementsModel } from '../../models/requirementquerymodel/requ
 
 export const getAllRequirements = async (req, res) => {
   try {
-    const tenantId  = req.user?.tenantId  || req.query.tenantId;
-    const projectId = Number(req.body?.projectId);
+    // also check req.auth as some auth middlewares attach token data here
+    const tenantId  = req.user?.tenantId  || req.auth?.tenantId || req.query.tenantId;
+    const projectId = req.projectId;
     console.log(projectId) 
 
     if (!tenantId)  return res.status(400).json({ message: 'Unauthorised request' });

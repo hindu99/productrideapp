@@ -19,7 +19,7 @@ const RequirementsPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { id } = useParams();                 // reading :id from route
-  const isEditing = Boolean(id);              // derived state
+//  const isEditing = Boolean(id);              // derived state
 
   const { requirement, acceptanceCriteria } = location.state || {};
 
@@ -52,7 +52,7 @@ const RequirementsPage = () => {
     const fetchUsers = async () => {
       try {
         const response = await fetch('http://localhost:5000/api/findusers', {
-          method: 'POST',
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             //Using the function from helper function "addtoken.js" below, we are adding the JWT token to the request 

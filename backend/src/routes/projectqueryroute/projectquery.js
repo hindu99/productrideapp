@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Route to query projects
 // This route is executing authMiddleware to extract the JWT token details
-router.post('/findprojects', authMiddleware, getallprojects);
+router.get('/findprojects', authMiddleware, getallprojects);
 
 // Export the router to be used in the main app
 export default router;

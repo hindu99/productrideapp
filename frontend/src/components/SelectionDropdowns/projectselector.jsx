@@ -18,17 +18,17 @@ export default function ProjectSelect({ value, onChange }) {
       try {
         setLoading(true);
         const response = await fetch('http://localhost:5000/api/findprojects', {
-          method: 'POST',
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            ...addToken(),//JWT token is added 
+            ...addToken(),
           },
         });
 
         if (!response.ok) throw new Error('Failed to fetch projects');
         const data = await response.json();
         setProjects(data);
-      } catch {
+      } catch  {
         setError('Could not load projects');
       } finally {
         setLoading(false);
@@ -38,7 +38,7 @@ export default function ProjectSelect({ value, onChange }) {
     fetchProjects();
   }, []);
 
-  // Render the dropdown with loading, error, and project options we got from the server
+  // Render the dropdown with loading, error, and project options
   return (
     <select
       value={value}

@@ -29,7 +29,7 @@ function authMiddleware(req, res, next) {
     req.role = decoded.role;
     req.userId=decoded.userId
     req.user = decoded; // save entire decoded info if needed
-    
+
 
     next(); // pass control to next middleware/route
   } catch (err) {

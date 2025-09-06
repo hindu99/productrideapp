@@ -6,6 +6,7 @@ import KanbanColumn from "../../components/KanbanBoardComponents/boardcolumn.jsx
 import "./board.css";
 import { addToken } from "../../HelperFunctions/addtoken";
 import Layout from "../../components/PageLayouts/pagelayout"; 
+import { addProject } from "../../HelperFunctions/addprojectid.js";
 
 //  exact status labels stored in DB is used here :
 const DB_STATUSES = ["In Backlog", "In Development", "In Test", "Completed"];
@@ -61,13 +62,14 @@ export default function KanbanBoard() {
       
       try {
         const res = await fetch('http://localhost:5000/api/board', {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             //Using the function from helper function "addtoken.js" below, we are adding the JWT token to the request 
             ...addToken(),
+            ...addProject(),
           },
-          body: JSON.stringify({projectId:7}), // include tenantId/projectId here if needed
+          //body: JSON.stringify({}), 
         });
         if (!res.ok) throw new Error(`Failed to load board: ${res.status}`);
         const data = await res.json();
