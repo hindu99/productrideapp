@@ -15,6 +15,7 @@ const Signup = () => {
   const [errors, setErrors] = useState([]); // For validation errors,"error" term is used 
   const [apiError, setApiError] = useState(''); // For API/server errors
   let tenantName=''; //variable for storing tenant name 
+  const role='admin'
 
   // Function to render error messages
   const renderErrors = () => {
@@ -67,6 +68,7 @@ if (category === 'organisation') {
       //organisation: organisationName || null,
       email,
       password,
+      role,
   
     };
 

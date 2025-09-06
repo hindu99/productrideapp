@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 
 
 const signup = async (req, res) => {
-  const { tenantName, fullname, category, email, password } = req.body;
+  const { tenantName, fullname, category, email, password,role} = req.body;
   const tenantId=uuidv4();
 
   try {
@@ -22,7 +22,7 @@ const signup = async (req, res) => {
 
     await createtenant({tenantId,tenantName,category})
   
-    await createUser({ tenantId,fullname, email, password: hashedPassword });
+    await createUser({ tenantId,fullname, email, password: hashedPassword,role });
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {

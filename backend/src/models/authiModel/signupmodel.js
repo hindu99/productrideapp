@@ -11,16 +11,17 @@ export const findUserByEmail = async (email) => {
   return result.recordset[0];
 };
 
-export const createUser = async ({ tenantId, fullname, email, password }) => {
+export const createUser = async ({ tenantId, fullname, email, password,role }) => {
   const pool = await connectDB();
   await pool.request()
     .input('tenantID', mssql.VarChar, tenantId )
     .input('fullname', mssql.VarChar, fullname )
     .input('email', mssql.VarChar, email)
     .input('password', mssql.VarChar, password)
+    .input('role',mssql.NVarChar,role)
     .query(`
-      INSERT INTO users (tenant_id,fullname,email, password)
-      VALUES (@tenantID, @fullname, @email, @password)
+      INSERT INTO users (tenant_id,fullname,email, password,role)
+      VALUES (@tenantID, @fullname, @email, @password,@role)
     `);
 };
 
