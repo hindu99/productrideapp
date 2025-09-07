@@ -1,3 +1,5 @@
-// setupTests.js
+/* eslint-env jest */
+
+// helpers
 import "@testing-library/jest-dom";
-import "whatwg-fetch"; // polyfills fetch in jsdom if your code relies on it
+import "whatwg-fetch";
