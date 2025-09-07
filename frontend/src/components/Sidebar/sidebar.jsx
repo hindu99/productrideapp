@@ -6,7 +6,7 @@ import './sidebar.css';
 const menuItems = [
   { name: 'Dashboard', path: '/Board' },
   { name: 'Requirement Box', path: '/requirementbox' },
-  { name: 'Product List', path: '/products' },
+  { name: 'Backlog', path: '/backlogtable' },
   { name: 'Users', path: '/users' },
   { name: 'Admin', path: '/adminmainpage' },
   { name: 'Logout', path: '/logout' }

@@ -13,6 +13,7 @@ import requirementsbyId from './routes/Requirmenthandling/requirementbyid.js'
 import projectqueryroute from './routes/projectqueryroute/projectquery.js'
 import boardqueryroute from './routes/Kanbanboard/kanbanboard.js'
 import cardstatusupdate from './routes/Kanbanboard/cardstatusupdate.js'
+import backlogtable from './routes/backlogtableroute/backlogtableroute.js'
 
 
 
@@ -53,6 +54,7 @@ app.use('/api', projectqueryroute)
 app.use('/api', boardqueryroute)
 app.use('/api', cardstatusupdate)
 app.use('/api', requirementsbyId)
+app.use('/api', backlogtable)
 
 
 app.get('/api', (req, res) => {

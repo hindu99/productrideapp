@@ -1,0 +1,7 @@
+.backlog-container { padding: 16px; }
+.backlog-header { margin-bottom: 12px; }
+.backlog-table { border:1px solid #e5e7eb; border-radius:8px; overflow:hidden; }
+.backlog-row { display:grid; grid-template-columns: 1fr 140px 140px; padding:10px 12px; border-top:1px solid #f1f5f9; align-items:center; }
+.backlog-row--head { background:#f8fafc; font-weight:600; }
+.muted { color:#6b7280; }
+.error-text { color:#b91c1c; margin-bottom:8px; }
