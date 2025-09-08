@@ -9,11 +9,11 @@ dotenv.config();
 // Controller function to create a non-admin user
 const createusers = async (req, res) => {
   // Extract user details from request body
-  const { fullname, email, password } = req.body;
+  const { fullname, email, password,role } = req.body;
   // Extract tenantId and role from request (set by authMiddleware)
   //authMiddleware is decoding the JWT and then collectin this info
   const tenantId = req.tenantId;
-  const role = req.role;
+  
 
   // Validate required fields
   if (!fullname || !email || !password) {
