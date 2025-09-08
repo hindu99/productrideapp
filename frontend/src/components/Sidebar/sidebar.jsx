@@ -1,14 +1,15 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './sidebar.css';
+import { getUserRole } from '../../HelperFunctions/tokendecoder';
 
 /* Sidebar menu items */
 const menuItems = [
-  { name: 'Dashboard', path: '/Board' },
-  { name: 'Requirement Box', path: '/requirementbox' },
+  { name: 'Kanban Board', path: '/Board' },
   { name: 'Backlog', path: '/backlogtable' },
+  { name: 'Add Requirement', path: '/requirementbox' },
   { name: 'Users', path: '/users' },
-  { name: 'Admin', path: '/adminmainpage' },
+  { name: 'Admin', path: '/adminmainpage', role: 'admin' },
   { name: 'Logout', path: '/logout' }
 ];
 
@@ -19,11 +20,26 @@ const SideBar = ({ collapsed = false, onToggle }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // read role from your decoder
+  let role = null;
+  try {
+    const raw = (typeof getUserRole === 'function' ? getUserRole() : null);
+    role = typeof raw === 'string' ? raw.trim().toLowerCase() : null;
+  } catch {
+    role = null;
+  }
+
   // SPA navigation helper
   const handleNavigation = (path) => {
     // If parent wants to track selection, it can still do that outside
     navigate(path); // no full reload
   };
+
+  //This code is hiding admin ,if the user is not admin
+  const visibleItems = menuItems.filter((item) => {
+    if (!item.role) return true;
+    return role === String(item.role).toLowerCase();
+  });
 
   return (
     <div className={`side-menu ${collapsed ? 'collapsed' : 'open'}`}>
@@ -39,7 +55,7 @@ const SideBar = ({ collapsed = false, onToggle }) => {
 
       {/* Sidebar menu list */}
       <ul className="menu-list">
-        {menuItems.map(({ name, path }) => {
+        {visibleItems.map(({ name, path }) => {
           const isActive = location.pathname === path;
           return (
             <li
