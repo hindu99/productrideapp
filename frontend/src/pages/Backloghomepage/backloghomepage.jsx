@@ -1,5 +1,6 @@
 // pages/Backlog/backlogpage.jsx
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../components/PageLayouts/pagelayout";
 import { addToken } from "../../HelperFunctions/addtoken";
 import { addProject } from "../../HelperFunctions/addprojectid.js";
@@ -10,6 +11,7 @@ export default function BackloghomePage() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -39,7 +41,7 @@ export default function BackloghomePage() {
     <Layout>
       <div className="backlog-container">
         <header className="backlog-header">
-          <h2>Backlog</h2>
+
         </header>
 
         {loading && <div className="muted">Loading…</div>}
@@ -47,24 +49,38 @@ export default function BackloghomePage() {
 
         {!loading && !error && (
           <div className="backlog-table">
+          <h2 className="backlog-title">Backlog</h2>
             <div className="backlog-row backlog-row--head">
               <div className="col col-title">Title</div>
               <div className="col col-sprint">Sprint</div>
               <div className="col col-rice">RICE</div>
             </div>
 
-            {items.map((it) => (
-              <div className="backlog-row" key={it.id}>
-                <div className="col col-title">{it.title}</div>
-                <div className="col col-sprint">{it.sprint ?? "-"}</div>
+            {items.map((item) => (
+              <div
+                className="backlog-row backlog-row--clickable"
+                key={item.id}
+                role="button"
+                tabIndex={0}
+                onClick={() => navigate(`/requirementpage/${item.id}`)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    navigate(`/requirementpage/${item.id}`);
+                  }
+                }}
+              >
+                <div className="col col-title">{item.title}</div>
+                <div className="col col-sprint">{item.sprint ?? "-"}</div>
                 <div className="col col-rice">
-                  {Number.isFinite(it.riceScore) ? it.riceScore.toFixed(2) : "—"}
+                  {Number.isFinite(item.riceScore) ? item.riceScore.toFixed(2) : "—"}
                 </div>
               </div>
             ))}
+
           </div>
         )}
       </div>
     </Layout>
   );
-} 
+}
