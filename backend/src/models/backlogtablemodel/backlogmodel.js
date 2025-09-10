@@ -21,7 +21,7 @@ SELECT
       WHERE r.tenant_id  = @tenantId
         AND r.project_id = @projectId
         AND r.status     = 'In Backlog'
-      ORDER BY r.rice_score ASC;
+      ORDER BY r.rice_score DESC
     `);
   return result.recordset;
 };
