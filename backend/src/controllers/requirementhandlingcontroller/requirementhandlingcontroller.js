@@ -1,7 +1,6 @@
 // controllers/requirements/requirements.controller.js
 import dotenv from 'dotenv';
-import { createRequirement, getRequirementById } from '../../models/requirementmodel/requirementdatahandlingmodel.js';
-
+import { createRequirement, getRequirementById,updateRequirement} from '../../models/requirementmodel/requirementdatahandlingmodel.js';
 // Load environment variables
 dotenv.config();
 
@@ -81,5 +80,55 @@ export const getRequirementByIdController = async (req, res) => {
   } catch (error) {
     console.error('Get Requirement Error:', error);
     res.status(500).json({ message: 'Server error during requirement fetch' });
+  }
+};
+
+// New controller for updating the requirment when editing 
+export const updateRequirementController = async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    if (!Number.isInteger(id)) {
+      return res.status(400).json({ message: 'Invalid requirement id' });
+    }
+
+    const {
+      title,
+      requirements,
+      acceptanceCriteria,
+      sprint,
+      assignee,
+      project,
+      status,
+      reach,
+      impact,
+      confidence,
+      effort,
+      area
+    } = req.body;
+
+    const tenantId = req.tenantId;
+
+    const ok = await updateRequirement({
+      id,
+      tenantId,
+      title,
+      requirements,
+      acceptanceCriteria,
+      sprint,
+      assignee,
+      project,
+      status,
+      reach: Number(reach) || 0,
+      impact: Number(impact) || 0,
+      confidence: Number(confidence) || 0,
+      effort: Number(effort) || 0,
+      area
+    });
+
+    if (!ok) return res.status(404).json({ message: 'Requirement not found' });
+    res.json({ message: 'Requirement updated successfully' });
+  } catch (error) {
+    console.error('Requirement Update Error:', error);
+    res.status(500).json({ message: 'Server error during requirement update' });
   }
 };

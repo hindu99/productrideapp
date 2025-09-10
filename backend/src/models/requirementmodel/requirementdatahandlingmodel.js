@@ -77,3 +77,57 @@ export const getRequirementById = async (id) => {
 
   return result.recordset[0]; // return single requirement row
 };
+
+//Model for updating requirment when editing the requirment after
+export const updateRequirement = async ({
+  id,
+  tenantId,
+  title,
+  requirements,
+  acceptanceCriteria,
+  sprint,
+  assignee,
+  project,
+  status,
+  reach,
+  impact,
+  confidence,
+  effort,
+  area
+}) => {
+  const pool = await connectDB();
+
+  const result = await pool.request()
+    .input('id', mssql.Int, id)
+    .input('tenantId', mssql.UniqueIdentifier, tenantId)
+    .input('title', mssql.NVarChar(255), title)
+    .input('requirements', mssql.NVarChar(mssql.MAX), requirements)
+    .input('acceptanceCriteria', mssql.NVarChar(mssql.MAX), acceptanceCriteria)
+    .input('sprintId', mssql.Int, sprint || null)
+    .input('assigneeId', mssql.Int, assignee || null)
+    .input('projectId', mssql.Int, project || null)
+    .input('status', mssql.NVarChar(50), status)
+    .input('reach', mssql.Int, reach)
+    .input('impact', mssql.Int, impact)
+    .input('confidence', mssql.Int, confidence)
+    .input('effort', mssql.Int, effort)
+    .input('area', mssql.NVarChar(255), area || null)
+    .query(`
+      UPDATE dbo.requirements
+         SET title = @title,
+             ai_refined_description = @requirements,
+             acceptance_criteria = @acceptanceCriteria,
+             sprint_id = @sprintId,
+             assignee_id = @assigneeId,
+             project_id = @projectId,
+             status = @status,
+             reach = @reach,
+             impact = @impact,
+             confidence = @confidence,
+             effort = @effort,
+             area = @area
+       WHERE requirement_id = @id AND tenant_id = @tenantId
+    `);
+
+  return result.rowsAffected?.[0] > 0;
+};

@@ -126,8 +126,12 @@ const RequirementsPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/requirementdata', {
-        method: 'POST',
+       const url = id
+? `http://localhost:5000/api/requirements/${id}`
+: 'http://localhost:5000/api/requirementdata';
+const method = id ? 'PUT' : 'POST';
+ const response = await fetch(url, {
+ method,
         headers: {
           'Content-Type': 'application/json',
           ...addToken(), // Spread token headers here inside headers object
@@ -139,7 +143,7 @@ const RequirementsPage = () => {
 
       if (response.ok) {
         // Go home (router-friendly)
-        alert('Requirement added successfully')
+        alert(id ? 'Requirement updated successfully' : 'Requirement added successfully')
         navigate('/requirementpage');
       } else {
         setApiError(data.message || 'Something went wrong, please try again.');
