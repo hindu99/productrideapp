@@ -8,7 +8,7 @@ const menuItems = [
   { name: 'Kanban Board', path: '/Board' },
   { name: 'Backlog', path: '/backlogtable' },
   { name: 'Add Requirement', path: '/requirementbox' },
-  { name: 'Users', path: '/users' },
+  { name: 'Project Selection', path: '/entrypage' },
   { name: 'Admin', path: '/adminmainpage', role: 'admin' },
   { name: 'Logout', path: '/logout' }
 ];
