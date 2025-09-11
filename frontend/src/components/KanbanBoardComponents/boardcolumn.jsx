@@ -7,6 +7,8 @@ import KanbanCard from "./boardcard.jsx";
 import "./boardcolumn.css";
 import { addToken } from "../../HelperFunctions/addtoken";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function KanbanColumn({ columnId, title, items, moveCard }) {
   const columnRef = useRef(null);
 
@@ -41,7 +43,7 @@ function KanbanColumn({ columnId, title, items, moveCard }) {
         // Note: persistence for card→card drops is handled in KanbanCard's onDrop.
         // For column background drops, we persist here because the column is the drop target .
         try {
-          const response = await fetch("http://localhost:5000/api/cardposition", {
+          const response = await fetch(`${API_URL}/api/cardposition`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

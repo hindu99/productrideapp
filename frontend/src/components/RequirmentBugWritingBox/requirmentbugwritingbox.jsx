@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../PageLayouts/pagelayout";
 
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 const RequirementWriting = () => {
   const [requirements, setRequirements] = useState('');
@@ -31,7 +31,7 @@ const navigate = useNavigate();
 
     try {
 
-        const response= await fetch ('http://localhost:5000/api/requirementbox', {
+        const response= await fetch (`${API_URL}/api/requirementbox`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

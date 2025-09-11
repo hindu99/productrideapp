@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './createproject.css';
 import { addToken } from '../../HelperFunctions/addtoken';
 import Layout from "../../components/PageLayouts/pagelayout"; 
+const API_URL = import.meta.env.VITE_API_URL;
 
 /*
   CreateProject component handles creation of new projects by admin.
@@ -54,7 +55,7 @@ const CreateProject = () => {
 
     // Make POST request to backend for registering project
     try {
-      const response = await fetch('http://localhost:5000/api/createproject', {
+      const response = await fetch(`${API_URL}/api/createproject`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -10,6 +10,8 @@ import './requirementpage.css';
 import { addToken } from '../../HelperFunctions/addtoken';
 import ProjectSelect from "../../components/SelectionDropdowns/projectselector.jsx";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 /*
   Requirements screen: confirm title/requirement/acceptance criteria
   and set metadata like assignee, RICE, etc.
@@ -51,7 +53,7 @@ const RequirementsPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/findusers', {
+        const response = await fetch(`${API_URL}/api/findusers`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -79,7 +81,7 @@ const RequirementsPage = () => {
     if (!id) return;
     const fetchRequirement = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/requirements/${id}`, {
+        const response = await fetch(`${API_URL}/api/requirements/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -127,8 +129,8 @@ const RequirementsPage = () => {
 
     try {
        const url = id
-? `http://localhost:5000/api/requirements/${id}`
-: 'http://localhost:5000/api/requirementdata';
+? `${API_URL}/api/requirements/${id}`
+: `${API_URL}/api/requirementdata`;
 const method = id ? 'PUT' : 'POST';
  const response = await fetch(url, {
  method,

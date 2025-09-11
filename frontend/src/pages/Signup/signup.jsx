@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import './signup.css';
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 // Signup component handles user registration for both individual users and organisations
 const Signup = () => {
@@ -74,7 +74,7 @@ if (category === 'organisation') {
 
     // Make POST request to backend for registering signup details
     try {
-      const response = await fetch('http://localhost:5000/api/signup', {
+      const response = await fetch(`${API_URL}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

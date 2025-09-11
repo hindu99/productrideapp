@@ -34,7 +34,7 @@ export default [
   {
     files: ['**/*.test.js', '**/*.test.jsx', '**/__tests__/**/*.js', '**/__tests__/**/*.jsx'],
     languageOptions: {
-      globals: { ...globals.jest, global: 'writable' },
+      globals: { ...globals.jest, global: 'writable' ,...globals.node},
     },
   },
 ]

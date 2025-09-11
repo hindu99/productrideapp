@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import './createuser.css';
 import { addToken } from '../../HelperFunctions/addtoken';
+import { useNavigate } from 'react-router-dom';
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 /*CreateUser component handles user creation by admin,In the system only admins can be created via siguppage 
 rest of the users has to be created by admin.This function does that*/
 const CreateUser = () => {
+  const navigate = useNavigate();
   // State variables for form fields and error message
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,6 +35,7 @@ const CreateUser = () => {
 
   // Function to handle usercreation form submission
 const handleCreateUser = async (e) => {
+  
   e.preventDefault();
   // Basic validation
   const validationErrors = [];
@@ -57,7 +60,7 @@ const handleCreateUser = async (e) => {
 
   // Make POST request to backend for registering user details
   try {
-    const response = await fetch('http://localhost:5000/api/createuser', {
+    const response = await fetch(`${API_URL}/api/createuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,6 +73,7 @@ const handleCreateUser = async (e) => {
     if (response.ok) {
       //Giving a notification if the registration is successfull
        alert("Registration successful!");
+       navigate('/Board')
     } else {
       setApiError(data.message || 'User Registration failed. Please try again.');
     }

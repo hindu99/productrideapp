@@ -6,6 +6,7 @@ import { addToken } from "../../HelperFunctions/addtoken";
 import { addProject } from "../../HelperFunctions/addprojectid.js";
 
 import "./backloghomepage.css";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function BackloghomePage() {
   const [items, setItems] = useState([]);
@@ -19,7 +20,7 @@ export default function BackloghomePage() {
       setError(null);
       //Request to the server for getting the backlog items 
       try {
-        const res = await fetch("http://localhost:5000/api/backlog", {
+        const res = await fetch(`${API_URL}/api/backlog`, {
           headers: {
             "Content-Type": "application/json",
             ...addToken(),

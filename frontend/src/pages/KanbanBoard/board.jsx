@@ -8,6 +8,8 @@ import { addToken } from "../../HelperFunctions/addtoken";
 import Layout from "../../components/PageLayouts/pagelayout"; 
 import { addProject } from "../../HelperFunctions/addprojectid.js";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 //  exact status labels stored in DB is used here :
 const DB_STATUSES = ["In Backlog", "In Development", "In Test", "Completed"];
 
@@ -61,7 +63,7 @@ export default function KanbanBoard() {
     (async () => {
       
       try {
-        const res = await fetch('http://localhost:5000/api/board', {
+        const res = await fetch(`${API_URL}/api/board`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
