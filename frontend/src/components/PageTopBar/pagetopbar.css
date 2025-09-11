@@ -50,7 +50,7 @@
   transition: background 0.2s;
 }
 .topbar-button:hover {
-  background: #f0f0f0;
+  background: #007bff;
 }
 
 .topbar-profile {

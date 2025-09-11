@@ -18,8 +18,7 @@ const TopBar = () => {
 
       {/* Top bar right side corner */}
       <div className="topbar-actions">
-        {/* Navigation button for Docs */}
-        <button className="topbar-button">Docs</button>
+       
 
         {/* Logout button */}
         <button className="topbar-button" onClick={handleLogout}>
