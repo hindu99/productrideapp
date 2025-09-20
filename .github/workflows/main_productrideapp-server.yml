@@ -49,10 +49,18 @@ jobs:
         with:
           name: node-app
 
+      # Optional: Debug to confirm paths
+      - name: Debug workspace
+        run: |
+          pwd
+          ls -la
+          ls -la node-app || true
+          ls -la node-app/backend || true
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'productrideapp-server'
           slot-name: 'Production'
-          package: backend
+          package: ./node-app/backend
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F855FC7272D48BCA9FB21F24B59C6C7 }}
