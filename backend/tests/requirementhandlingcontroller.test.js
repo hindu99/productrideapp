@@ -74,7 +74,7 @@ describe('createrequirement', () => {
         tenantId: 4321,
         userId: 9876,
         title: 'Batch pricing ',
-        requirements: 'Allow ops to bulk-adjust  %',
+        requirements: 'Allow ops to bulk-adjust %',
         acceptanceCriteria: 'Can update 50+ rows; audit log entry created',
         sprint: 'Sprint-19',
         assignee: '007',
