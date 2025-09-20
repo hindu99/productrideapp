@@ -62,5 +62,5 @@ jobs:
         with:
           app-name: 'productrideapp-server'
           slot-name: 'Production'
-          package: ./node-app/backend
+          package: ./backend 
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F855FC7272D48BCA9FB21F24B59C6C7 }}
