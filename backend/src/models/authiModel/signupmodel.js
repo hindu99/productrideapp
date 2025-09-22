@@ -27,6 +27,8 @@ export const createUser = async ({ tenantId, fullname, email, password,role }) =
     `);
 };
 
+//This is creating tenants in database
+
 export const createtenant= async ({tenantId,tenantName,category})=>{
   const pool =await connectDB();
   await pool.request()
