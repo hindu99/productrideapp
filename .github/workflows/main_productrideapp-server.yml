@@ -25,15 +25,12 @@ jobs:
             exit 1
           fi
 
-      # (Optional) quick sanity: list both apps
-      - name: Debug tree
+      - name: Debug tree (build job)
         run: |
           echo "Root:"
           ls -la
           echo "Backend:"
           ls -la backend || true
-          echo "Frontend:"
-          ls -la frontend || true
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -49,13 +46,12 @@ jobs:
           npm run build --if-present
           npm test --if-present
 
-    
-
       - name: Upload backend artifact
         uses: actions/upload-artifact@v4
         with:
           name: backend-app
-          path: backend
+          path: backend/               # <-- trailing slash ensures contents uploaded
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
@@ -66,7 +62,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: backend-app
-          path: .
+          path: backend                # <-- extract into ./backend
 
       - name: Debug workspace before deploy
         run: |
@@ -80,5 +76,5 @@ jobs:
         with:
           app-name: 'productrideapp-server'
           slot-name: 'Production'
-          package: ./backend
+          package: ./backend           # <-- deploy this folder
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F855FC7272D48BCA9FB21F24B59C6C7 }}
