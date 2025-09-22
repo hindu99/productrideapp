@@ -12,14 +12,16 @@ const signup = async (req, res) => {
   const { tenantName, fullname, category, email, password,role} = req.body;
   const tenantId=uuidv4();
 
+//Checking the user 
   try {
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ message: 'Email already registered.' });
     }
-
+// Using bcrypt hasing the password 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    //creating tenant and user  
     await createtenant({tenantId,tenantName,category})
   
     await createUser({ tenantId,fullname, email, password: hashedPassword,role });
@@ -46,6 +48,7 @@ const login=async(req,res)=>{
       return res.status(400).json({message:'password doesnt match,please try again'})
     }
 
+    //Constructing user details for token 
     const JWTtokendetails = {
       userId: userdetailes.user_id,  
       tenantId: userdetailes.tenant_id,
@@ -53,6 +56,8 @@ const login=async(req,res)=>{
       fullname: userdetailes.fullname,
       role:userdetailes.role,
     };
+
+    //JWT token , this is send to the frontend , which has the secret key, details and expiry
 
     const token = jwt.sign(JWTtokendetails, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
