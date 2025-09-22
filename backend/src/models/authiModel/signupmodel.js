@@ -11,6 +11,8 @@ export const findUserByEmail = async (email) => {
   return result.recordset[0];
 };
 
+//Create user model which creates users in database 
+
 export const createUser = async ({ tenantId, fullname, email, password,role }) => {
   const pool = await connectDB();
   await pool.request()

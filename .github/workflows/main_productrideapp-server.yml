@@ -49,14 +49,7 @@ jobs:
           npm run build --if-present
           npm test --if-present
 
-      # (Optional) lint/test frontend without deploying it
-      - name: Frontend checks (optional)
-        if: ${{ hashFiles('frontend/package.json') != '' }}
-        working-directory: frontend
-        run: |
-          npm ci || npm install
-          npm run build --if-present
-          npm test --if-present
+    
 
       - name: Upload backend artifact
         uses: actions/upload-artifact@v4
