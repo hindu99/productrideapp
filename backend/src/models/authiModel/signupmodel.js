@@ -2,7 +2,7 @@
 import { connectDB, mssql } from '../../config/dbconfig.js';
 
 
-
+//Based on the email getting data from database 
 export const findUserByEmail = async (email) => {
   const pool = await connectDB();
   const result = await pool.request()

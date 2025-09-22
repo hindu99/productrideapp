@@ -2,10 +2,9 @@ name: Build and deploy Node.js app to Azure Web App - productrideapp-server
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
-      - 'backend/**'
+      - 'backend/**'                    # trigger when backend changes
       - '.github/workflows/azure-webapps.yml'
   workflow_dispatch:
 
@@ -15,52 +14,78 @@ jobs:
     permissions:
       contents: read
 
-    defaults:
-      run:
-        working-directory: backend
-
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js version
-        uses: actions/setup-node@v3
+      - name: Verify backend directory exists
+        run: |
+          if [ ! -d "backend" ]; then
+            echo "ERROR: ./backend does not exist. Repo contents:"
+            ls -la
+            exit 1
+          fi
+
+      # (Optional) quick sanity: list both apps
+      - name: Debug tree
+        run: |
+          echo "Root:"
+          ls -la
+          echo "Backend:"
+          ls -la backend || true
+          echo "Frontend:"
+          ls -la frontend || true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
 
-      - name: npm install, build, and test
+      - name: Install, build, test (backend)
+        working-directory: backend
         run: |
           npm ci || npm install
           npm run build --if-present
-          npm run test --if-present
+          npm test --if-present
 
-      - name: Upload artifact for deployment job
+      # (Optional) lint/test frontend without deploying it
+      - name: Frontend checks (optional)
+        if: ${{ hashFiles('frontend/package.json') != '' }}
+        working-directory: frontend
+        run: |
+          npm ci || npm install
+          npm run build --if-present
+          npm test --if-present
+
+      - name: Upload backend artifact
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
-          path: backend   # upload the backend folder from repo root
+          name: backend-app
+          path: backend
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Download artifact from build job (to repo root)
+      - name: Download backend artifact
         uses: actions/download-artifact@v4
         with:
-          name: node-app
-          path: .           # <-- extract here so ./backend exists
+          name: backend-app
+          path: .
 
-      - name: Debug workspace
+      - name: Debug workspace before deploy
         run: |
           pwd
           ls -la
           echo "--- ./backend ---"
           ls -la ./backend
 
-      - name: Deploy to Azure Web App
+      - name: Deploy backend to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'productrideapp-server'
           slot-name: 'Production'
-          package: ./backend   # <-- now present after download
+          package: ./backend
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0F855FC7272D48BCA9FB21F24B59C6C7 }}
